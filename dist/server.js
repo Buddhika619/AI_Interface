@@ -7,17 +7,12 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const morgan_1 = __importDefault(require("morgan"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
-const db_1 = __importDefault(require("./config/db"));
 const cors_1 = __importDefault(require("cors"));
-const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
-const emailRoutes_1 = __importDefault(require("./routes/emailRoutes"));
-const youtubeRoutes_1 = __importDefault(require("./routes/youtubeRoutes"));
-const instaRoutes_1 = __importDefault(require("./routes/instaRoutes"));
+const aiRouts_1 = __importDefault(require("./routes/aiRouts"));
 const stability_client_1 = require("stability-client");
 const app = (0, express_1.default)();
 // Load environment variables from .env file
 dotenv_1.default.config();
-(0, db_1.default)();
 app.use((0, morgan_1.default)('dev'));
 // Use express.json to parse incoming request body as json
 app.use(express_1.default.json());
@@ -30,10 +25,7 @@ if (process.env.CLIENT_ADDRESS) {
     app.use((0, cors_1.default)(options));
 }
 // Function to define routes for the server
-app.use('/api/users', userRoutes_1.default);
-app.use('/api/email', emailRoutes_1.default);
-app.use('/api/youtube', youtubeRoutes_1.default);
-app.use('/api/insta', instaRoutes_1.default);
+app.use('/api/ai', aiRouts_1.default);
 const apiKey = process.env.ST_DEFUSION_KEY;
 app.get('/', (req, res) => {
     const api = (0, stability_client_1.generate)({

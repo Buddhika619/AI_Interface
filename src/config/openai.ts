@@ -21,4 +21,18 @@ const generator = async (model:string, prompt:string, temperature:number, max_to
   return completion.data.choices
 }
 
-export default generator
+
+const imageGenerator = async (prompt:string,results:number) :Promise<any> => {
+
+  const response = await OpenAi.createImage({
+    prompt: prompt,
+    n: results,
+    size: "1024x1024",
+  });
+  return response.data.data;
+}
+
+
+
+
+export  {generator, imageGenerator}

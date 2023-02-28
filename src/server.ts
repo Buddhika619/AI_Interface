@@ -4,12 +4,11 @@ import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware'
 import path from 'path'
 import colors from 'colors'
-import connectDB from './config/db'
+
 import cors from 'cors'
-import userRoutes from './routes/userRoutes'
-import emailRoutes from './routes/emailRoutes'
-import youtubeRotes from './routes/youtubeRoutes'
-import instaRoutes from './routes/instaRoutes'
+
+import aiRoutes from './routes/aiRouts'
+
 import { generate } from 'stability-client'
 
 
@@ -17,8 +16,6 @@ const app = express()
 
 // Load environment variables from .env file
 dotenv.config()
-
-connectDB()
 
 app.use(morgan('dev'))
 
@@ -38,14 +35,9 @@ if (process.env.CLIENT_ADDRESS) {
 
 
 // Function to define routes for the server
-app.use('/api/users', userRoutes)
-app.use('/api/email', emailRoutes)
-app.use('/api/youtube', youtubeRotes)
-app.use('/api/insta', instaRoutes)
-
+app.use('/api/ai', aiRoutes)
 
 const apiKey:any = process.env.ST_DEFUSION_KEY
-
 
 app.get('/', (req: Request, res: Response) => {
   const api = generate({

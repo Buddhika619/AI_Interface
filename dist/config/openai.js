@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.imageGenerator = exports.generator = void 0;
 const openai_1 = require("openai");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -29,4 +30,13 @@ const generator = (model, prompt, temperature, max_tokens, results) => __awaiter
     });
     return completion.data.choices;
 });
-exports.default = generator;
+exports.generator = generator;
+const imageGenerator = (prompt, results) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield OpenAi.createImage({
+        prompt: prompt,
+        n: results,
+        size: "1024x1024",
+    });
+    return response.data.data;
+});
+exports.imageGenerator = imageGenerator;

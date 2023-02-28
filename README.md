@@ -8,10 +8,8 @@
 
 - Create a `.env` file in the root folder and add the following as `key = value`
   - PORT = 5000 (can be any port example: 8000)
-  - DB_STRING = mongo DB connection string 
-  - JWT_SECRET = Jason web token secret
   - OPENAI_KEY = Open AI API key
-  - DREAMSTUDIO_KEY = Dreap Studio API key
+  - DREAMSTUDIO_KEY = dreaam Studio API key
 ---
 
 # Run
